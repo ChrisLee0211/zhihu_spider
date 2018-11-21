@@ -58,7 +58,7 @@ class ZhihuSpider(scrapy.Spider):
         item_loader.add_css("watch_user_num", ".Button.NumberBoard-item .NumberBoard-itemValue::text")
         #item_loader.add_css("topics",".QuestionHeader-topics .Popover div::text")
         item_loader.add_xpath("topics","//div[@class='QuestionPage']/meta[@itemprop='keywords']/@content")
-        item_loader.add_css("click_num", ".NumberBoard-item .NumberBoard-itemValue::text")
+        item_loader.add_xpath("click_num", "//div[@class='NumberBoard-item']/div/strong/text()")
 
         question_item = item_loader.load_item()
         yield  scrapy.Request(url=self.start_answer_url.format(question_id,20,0),headers=self.headers, callback=self.parse_answer)
