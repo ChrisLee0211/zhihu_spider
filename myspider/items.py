@@ -9,7 +9,7 @@ import scrapy
 import re
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import MapCompose, Join, TakeFirst
-from myspider.utils.common import extract_num
+from myspider.utils.common import extract_num, watch_num_change
 from myspider.settings import SQL_DTAETIME_FORMAT, SQL_DATE_FORMAT
 import datetime
 
@@ -51,8 +51,8 @@ class ZhihuQuestionItem(scrapy.Item):
         content = "".join(self["content"])
         answer_num = extract_num("".join(self["answer_num"]))
         comments_num = extract_num("".join(self["comments_num"]))
-        watch_user_num = extract_num("".join(self["watch_user_num"]))
-        click_num = extract_num("".join(self["click_num"]))
+        watch_user_num = watch_num_change("".join(self["watch_user_num"]))
+        click_num = watch_num_change("".join(self["click_num"]))
         crawl_time = datetime.datetime.now().strftime(SQL_DTAETIME_FORMAT)  # 将datetime类型转换为str
 
         params = (

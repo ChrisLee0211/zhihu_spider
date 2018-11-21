@@ -16,3 +16,9 @@ def extract_num(text):
     else:
         nums = 0
     return nums
+
+def watch_num_change(text):
+    watch_list = text.split(",")
+    watch_str = "".join(watch_list)
+    return int(watch_str)
+
